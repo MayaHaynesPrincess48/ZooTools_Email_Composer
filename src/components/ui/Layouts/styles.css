@@ -1,0 +1,36 @@
+/* reset */
+button,
+input {
+    all: unset;
+}
+
+.createTagSpan {
+    display: none;
+    font-size: 10px;
+}
+  
+.plusTagButton:hover {
+    .createTagSpan {
+        display: block;
+    }
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
