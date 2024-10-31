@@ -21,7 +21,7 @@ import '@fontsource/poppins/700.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://demos.tiptap.dev'),
-  title: 'Tiptap block editor template',
+  title: 'Zootools_Email_Compoer',
   description:
     'Tiptap is a suite of open source content editing and real-time collaboration tools for developers building apps like Notion or Google Docs.',
   robots: 'noindex, nofollow',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     creator: '@tiptap_editor',
   },
   openGraph: {
-    title: 'Tiptap block editor template',
+    title: 'Zootools_Email_Compoer',
     description:
       'Tiptap is a suite of open source content editing and real-time collaboration tools for developers building apps like Notion or Google Docs.',
   },
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className="h-full font-sans" lang="en">
-      <body className="flex flex-col h-full">
-        <main className="h-full">{children}</main>
+    <html lang="en">
+      <body>
+        <main>{children}</main>
       </body>
     </html>
   );
