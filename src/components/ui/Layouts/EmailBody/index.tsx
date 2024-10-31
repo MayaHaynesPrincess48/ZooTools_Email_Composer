@@ -54,6 +54,8 @@ const TabsContent = styled(Tabs.Content)``;
 
 const EmailBody = () => {
   const [activeTab, setActiveTab] = useState('tab1');
+  const [json, setJson] = useState<Record<string, unknown>>({});
+  const [html, setHtml] = useState<string>('');
 
   return (
     <>
@@ -68,11 +70,14 @@ const EmailBody = () => {
           </TabsList>
         </div>
         <TabsContent value="tab1">
-          <EmailEditor />
+          <EmailEditor setJson={setJson} setHtml={setHtml} />
         </TabsContent>
-        <TabsContent value="tab2">Tab2</TabsContent>
-        <TabsContent value="tab3">Tab3</TabsContent>
-        <TabsContent value="tab4">Tab4</TabsContent>
+        <TabsContent value="tab2">Email Preview</TabsContent>
+        <TabsContent value="tab3">
+          Show HTML:
+          {html}
+        </TabsContent>
+        <TabsContent value="tab4">Show JSON</TabsContent>
       </TabsRoot>
     </>
   );

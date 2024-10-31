@@ -36,6 +36,7 @@ export const ContentItemMenu = ({ editor }: ContentItemMenuProps) => {
         offset: [-2, 16],
         zIndex: 99,
       }}
+      className="flex"
     >
       <div className="flex items-center gap-0.5">
         <Toolbar.Button onClick={actions.handleAdd}>

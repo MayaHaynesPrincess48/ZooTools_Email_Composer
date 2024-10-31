@@ -33,7 +33,7 @@ const DropdownList = styled.ul<DropdownListProps>`
   position: absolute;
   top: 30px;
   left: 0;
-  width: 310px;
+  width: 305px;
   max-height: 300px;
   padding: 5px;
   overflow-y: auto;
@@ -48,10 +48,10 @@ const DropdownList = styled.ul<DropdownListProps>`
 `;
 
 const DropdownItem = styled.li`
-  width: 94%;
+  width: 100%;
   display: inline-flex;
   align-items: center;
-  padding: 8px;
+  padding: 6px 8px;
   cursor: pointer;
   gap: 3px;
   font-size: 14px;

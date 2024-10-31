@@ -13,7 +13,7 @@ import './globals.css';
 export const runtime = 'edge';
 
 const FullContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
 `;
 
