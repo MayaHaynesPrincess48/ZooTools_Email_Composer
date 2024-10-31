@@ -51,11 +51,13 @@ export const EmailComposer = ({ setJson, setHtml }) => {
 
   const getJsonContent = () => {
     const jsonContent = editor.getJSON();
+    console.log('JSON: ', jsonContent);
     setJson(jsonContent);
   };
 
   const getHtmlContent = () => {
     const htmlContent = editor.getHTML();
+    console.log('HTML: ', htmlContent);
     setHtml(htmlContent);
   };
 
