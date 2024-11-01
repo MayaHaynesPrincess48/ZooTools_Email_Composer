@@ -1,6 +1,5 @@
 'use client';
 
-import { API } from '@/lib/api';
 import {
   BlockquoteFigure,
   CharacterCount,
@@ -44,7 +43,6 @@ import {
 } from '.';
 import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
 import { History } from '@tiptap/extension-history';
-// import { ImageUpload } from './ImageUpload';
 import { lowlight } from 'lowlight';
 
 // Import highlight.js languages
@@ -55,7 +53,6 @@ import html from 'highlight.js/lib/languages/xml';
 import python from 'highlight.js/lib/languages/python';
 import ruby from 'highlight.js/lib/languages/ruby';
 import java from 'highlight.js/lib/languages/java';
-import { ImageBlock } from './ImageBlock';
 
 // Register languages with lowlight
 lowlight.registerLanguage('html', html);
@@ -106,33 +103,8 @@ export const ExtensionKit = () => [
   Highlight.configure({ multicolor: true }),
   Underline,
   CharacterCount.configure({ limit: 50000 }),
-  // ImageUpload.configure(),
-  ImageBlock,
   ExtendedImage,
   // ResizeImage,
-  FileHandler.configure({
-    allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
-    onDrop: async (currentEditor, files, pos) => {
-      for (const file of files) {
-        try {
-          const url = await API.uploadImage(file);
-          currentEditor.chain().setImageBlockAt({ pos, src: url }).focus().run();
-        } catch (error) {
-          console.error('Image upload failed:', error);
-        }
-      }
-    },
-    onPaste: async (currentEditor, files) => {
-      for (const file of files) {
-        try {
-          const url = await API.uploadImage(file);
-          currentEditor.chain().setImageBlockAt({ pos: currentEditor.state.selection.anchor, src: url }).focus().run();
-        } catch (error) {
-          console.error('Image upload failed:', error);
-        }
-      }
-    },
-  }),
   Emoji.configure({
     enableEmoticons: true,
     suggestion: emojiSuggestion,

@@ -6,7 +6,6 @@ const MailContentWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
   height: 570px;
-  overflow-y: auto;
 `;
 
 interface MailContentProps {

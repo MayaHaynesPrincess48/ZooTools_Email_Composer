@@ -1,15 +1,15 @@
-import { cn } from '@/lib/utils'
-import React from 'react'
+import { cn } from '@/lib/utils';
+import React from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'ghost'
-export type ButtonSize = 'medium' | 'small' | 'icon' | 'iconSmall'
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'ghost';
+export type ButtonSize = 'medium' | 'small' | 'smaller' | 'icon' | 'iconSmall';
 
 export type ButtonProps = {
-  variant?: ButtonVariant
-  active?: boolean
-  activeClassname?: string
-  buttonSize?: ButtonSize
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
+  variant?: ButtonVariant;
+  active?: boolean;
+  activeClassname?: string;
+  buttonSize?: ButtonSize;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -57,18 +57,19 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
       buttonSize === 'medium' && 'py-2 px-3',
       buttonSize === 'small' && 'py-1 px-2',
+      buttonSize === 'smaller' && 'w-[24px] h-[24px] p-0.5',
       buttonSize === 'icon' && 'w-8 h-8',
       buttonSize === 'iconSmall' && 'w-6 h-6',
 
       className,
-    )
+    );
 
     return (
       <button ref={ref} disabled={disabled} className={buttonClassName} {...rest}>
         {children}
       </button>
-    )
+    );
   },
-)
+);
 
-Button.displayName = 'Button'
+Button.displayName = 'Button';

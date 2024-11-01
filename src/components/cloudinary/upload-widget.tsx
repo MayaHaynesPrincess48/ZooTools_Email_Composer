@@ -21,8 +21,6 @@ const UploadWidget = ({ children, onSuccess, onError }: UploadWidgetProps) => {
   };
 
   function handleOnLoad() {
-    console.log('handleOnLoad');
-
     setIsScriptLoading(false);
 
     if (!cloudinary.current && typeof window !== 'undefined') {
@@ -39,7 +37,6 @@ const UploadWidget = ({ children, onSuccess, onError }: UploadWidgetProps) => {
   }
 
   function createWidget() {
-    console.log('createWidget');
     return cloudinary.current?.createUploadWidget(
       uploadOptions,
       (error: UploadWidgetError, result: UploadWidgetResults) => {

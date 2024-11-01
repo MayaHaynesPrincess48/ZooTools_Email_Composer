@@ -87,3 +87,18 @@ body {
   display: flex;
   align-items: center;
 }
+
+.ProseMirror > * {
+  margin-left: 60px !important;
+  margin-right: 60px !important;
+  max-width: 100% !important;
+}
+
+.dragHandler button {
+  min-width: 24px !important;
+  min-height: 24px !important;
+}
+
+.tippy-box {
+  max-width: none !important;
+}

@@ -74,10 +74,13 @@ const EmailBody = () => {
         </TabsContent>
         <TabsContent value="tab2">Email Preview</TabsContent>
         <TabsContent value="tab3">
-          Show HTML:
+          Show HTML: <br />
           {html}
         </TabsContent>
-        <TabsContent value="tab4">Show JSON</TabsContent>
+        <TabsContent value="tab4">
+          Show JSON: <br />
+          {JSON.stringify(json, null, 2)}
+        </TabsContent>
       </TabsRoot>
     </>
   );

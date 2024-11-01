@@ -17,6 +17,7 @@ interface ImageNode extends ProseMirrorNode {
 interface ImageElementProps extends NodeViewProps {
   node: ImageNode;
 }
+
 function sizeClamp(length: number, min: number, max: number) {
   if (min !== undefined) {
     length = Math.max(length, min);

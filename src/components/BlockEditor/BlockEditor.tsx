@@ -7,7 +7,6 @@ import { useBlockEditor } from '@/hooks/useBlockEditor';
 import '@/styles/index.css';
 
 import { EditorContext } from '@/context/EditorContext';
-import ImageBlockMenu from '@/extensions/ImageBlock/components/ImageBlockMenu';
 import { ColumnsMenu } from '@/extensions/MultiColumn/menus';
 import { TableColumnMenu, TableRowMenu } from '@/extensions/Table/menus';
 import { ContentItemMenu } from '../menus/ContentItemMenu';
@@ -15,6 +14,7 @@ import { MessageHandler } from './components/MessageHandler';
 import { TextMenu } from '../menus/TextMenu';
 
 import styled from 'styled-components';
+import ImageBlockMenu from '@/extensions/Image/ImageBlockMenu';
 
 // Styled Components
 const Container = styled.div`
