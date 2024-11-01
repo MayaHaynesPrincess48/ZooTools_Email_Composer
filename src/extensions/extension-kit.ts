@@ -8,7 +8,6 @@ import {
   Dropcursor,
   Emoji,
   Figcaption,
-  FileHandler,
   Focus,
   FontFamily,
   FontSize,
@@ -39,6 +38,7 @@ import {
   Mathematics,
   TaskItem,
   ExtendedImage,
+  ImageBlock,
   // ResizeImage,
 } from '.';
 import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
@@ -103,6 +103,7 @@ export const ExtensionKit = () => [
   Highlight.configure({ multicolor: true }),
   Underline,
   CharacterCount.configure({ limit: 50000 }),
+  ImageBlock,
   ExtendedImage,
   // ResizeImage,
   Emoji.configure({

@@ -4,6 +4,7 @@ import { Image as BaseImage } from '@tiptap/extension-image';
 import { ResizeImage } from './ResizeImage';
 
 const ExtendedImage = BaseImage.extend({
+  name: 'imageBlock',
   addOptions() {
     return {
       ...this.parent?.(),

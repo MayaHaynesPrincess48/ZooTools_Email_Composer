@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as Tabs from '@radix-ui/react-tabs';
 import EmailEditor from './EmailEditor';
+import { EditorContext } from '../../../../context/EditorContext';
 
 const TabsRoot = styled(Tabs.Root)`
   display: flex;

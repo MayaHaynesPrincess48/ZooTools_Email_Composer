@@ -5,9 +5,9 @@ import { v4 as uuid } from 'uuid';
 
 import { Toolbar } from '@/components/ui/Toolbar';
 import { Icon } from '@/components/ui/Icon';
+// import { ImageBlockWidth } from './ImageBlockWidth';
 import { MenuProps } from '@/components/menus/types';
 import { getRenderContainer } from '@/lib/utils';
-import { ImageBlockWidth } from './ImageBlockWidth';
 
 export const ImageBlockMenu = ({ editor, appendTo }: MenuProps): JSX.Element => {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -38,12 +38,12 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps): JSX.Element => 
     editor.chain().focus(undefined, { scrollIntoView: false }).setImageBlockAlign('right').run();
   }, [editor]);
 
-  const onWidthChange = useCallback(
-    (value: number) => {
-      editor.chain().focus(undefined, { scrollIntoView: false }).setImageBlockWidth(value).run();
-    },
-    [editor],
-  );
+  // const onWidthChange = useCallback(
+  //   (value: number) => {
+  //     editor.chain().focus(undefined, { scrollIntoView: false }).setImageBlockWidth(value).run();
+  //   },
+  //   [editor],
+  // );
 
   return (
     <BaseBubbleMenu
@@ -89,8 +89,8 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps): JSX.Element => 
         >
           <Icon name="AlignHorizontalDistributeEnd" />
         </Toolbar.Button>
-        <Toolbar.Divider />
-        <ImageBlockWidth onChange={onWidthChange} value={parseInt(editor.getAttributes('imageBlock').width)} />
+        {/* <Toolbar.Divider /> */}
+        {/* <ImageBlockWidth onChange={onWidthChange} value={parseInt(editor.getAttributes('imageBlock').width)} /> */}
       </Toolbar.Wrapper>
     </BaseBubbleMenu>
   );

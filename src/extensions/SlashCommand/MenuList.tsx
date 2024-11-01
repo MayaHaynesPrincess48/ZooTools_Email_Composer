@@ -4,7 +4,7 @@ import { Command, MenuListProps } from './types';
 import { Surface } from '@/components/ui/Surface';
 import { DropdownButton } from '@/components/ui/Dropdown';
 import { Icon } from '@/components/ui/Icon';
-import { MenuButtonImage } from '@/extensions/Image/MenuButtonImage';
+import { MenuButtonImage } from '@/extensions/ImageBlock/components/MenuButtonImage';
 
 export const MenuList = React.forwardRef((props: MenuListProps, ref) => {
   const { editor } = props;

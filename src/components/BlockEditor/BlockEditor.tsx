@@ -14,7 +14,7 @@ import { MessageHandler } from './components/MessageHandler';
 import { TextMenu } from '../menus/TextMenu';
 
 import styled from 'styled-components';
-import ImageBlockMenu from '@/extensions/Image/ImageBlockMenu';
+import ImageBlockMenu from '@/extensions/ImageBlock/components/ImageBlockMenu';
 
 // Styled Components
 const Container = styled.div`
