@@ -13,7 +13,7 @@ import { useTextmenuContentTypes } from './hooks/useTextmenuContentTypes';
 import { ContentTypePicker } from './components/ContentTypePicker';
 import { EditLinkPopover } from './components/EditLinkPopover';
 import { HistoryPicker } from './components/HistoryPicker';
-import { MenuButtonImage } from '../../../extensions/Image/MenuButtonImage';
+// import { MenuButtonImage } from '../../../extensions/Image/MenuButtonImage';
 
 // We memorize the button so each button is not rerendered on every editor state change
 const MemoButton = memo(Toolbar.Button);

@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
 import { memo, useCallback } from 'react';
+import styled from 'styled-components';
 
 export type ColorButtonProps = {
   color?: string;
@@ -7,18 +7,34 @@ export type ColorButtonProps = {
   onColorChange?: (color: string) => void; // eslint-disable-line no-unused-vars
 };
 
-export const ColorButton = memo(({ color, active, onColorChange }: ColorButtonProps) => {
-  const wrapperClassName = cn(
-    'flex items-center justify-center px-1.5 py-1.5 rounded group',
-    !active && 'hover:bg-neutral-100',
-    active && 'bg-neutral-100',
-  );
-  const bubbleClassName = cn(
-    'w-4 h-4 rounded bg-slate-100 shadow-sm ring-offset-2 ring-current',
-    !active && `hover:ring-1`,
-    active && `ring-1`,
-  );
+const StyledButton = styled.button<{ $active?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  background-color: ${({ $active }) => ($active ? '#f5f5f5' : 'transparent')};
+  &:hover {
+    background-color: ${({ $active }) => (!$active ? '#f5f5f5' : '')};
+  }
+`;
 
+const ColorBubble = styled.div<{ color?: string; $active?: boolean }>`
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background-color: ${({ color }) => color || '#e5e7eb'};
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: ${({ color }) => color || '#e5e7eb'};
+  ring-offset-width: 2px;
+  ring-color: currentColor;
+  ${({ $active }) => $active && 'box-shadow: 0px 0px 0px 1px currentColor;'}
+  &:hover {
+    ${({ $active }) => !$active && 'box-shadow: 0px 0px 0px 1px currentColor;'}
+  }
+`;
+
+export const ColorButton = memo(({ color, active, onColorChange }: ColorButtonProps) => {
   const handleClick = useCallback(() => {
     if (onColorChange) {
       onColorChange(color || '');
@@ -26,9 +42,9 @@ export const ColorButton = memo(({ color, active, onColorChange }: ColorButtonPr
   }, [onColorChange, color]);
 
   return (
-    <button onClick={handleClick} className={wrapperClassName}>
-      <div style={{ backgroundColor: color, color: color }} className={bubbleClassName}></div>
-    </button>
+    <StyledButton onClick={handleClick} $active={active}>
+      <ColorBubble color={color} $active={active} />
+    </StyledButton>
   );
 });
 

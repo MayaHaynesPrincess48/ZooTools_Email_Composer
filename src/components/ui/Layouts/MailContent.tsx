@@ -17,7 +17,7 @@ interface MailContentProps {
 const MailContent: React.FC<MailContentProps> = ({ setJson, setHtml }) => {
   return (
     <MailContentWrapper>
-      <EmailComposer setJson={setJson} setHtml={setHtml} defaultContent="" onUpdate={() => {}} />
+      <EmailComposer setJson={setJson} setHtml={setHtml} />
     </MailContentWrapper>
   );
 };

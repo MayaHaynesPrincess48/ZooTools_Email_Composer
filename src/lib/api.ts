@@ -1,29 +1,40 @@
 export class API {
-  public static uploadImage = async file => {
-    const requestURL = await fetch('/api/images', { method: 'POST' });
+  private static API_TOKEN = 'Bearer Far4n-ZDIKz2XADoC6-Drzp3qAm_3dgl_EedzGI4';
 
-    const responseURL = await requestURL.json();
+  public static async uploadImage(file: File): Promise<string> {
+    try {
+      const uploadURLResponse = await fetch('/api/images', { method: 'POST' });
 
-    const url = responseURL.result.result.uploadURL;
+      if (!uploadURLResponse.ok) {
+        throw new Error('Failed to retrieve upload URL');
+      }
 
-    const myHeaders = new Headers();
-    myHeaders.append('Authorization', 'Bearer Far4n-ZDIKz2XADoC6-Drzp3qAm_3dgl_EedzGI4');
+      const { result } = await uploadURLResponse.json();
+      const uploadURL = result.result.uploadURL;
 
-    const formdata = new FormData();
-    formdata.append('file', file, file.name);
+      const headers = new Headers();
+      headers.append('Authorization', API.API_TOKEN);
 
-    const requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-    };
+      const formData = new FormData();
+      formData.append('file', file, file.name);
 
-    const request = await fetch(url, requestOptions);
+      const uploadResponse = await fetch(uploadURL, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
 
-    const response = await request.json();
+      if (!uploadResponse.ok) {
+        throw new Error('Failed to upload image');
+      }
 
-    return response.result.variants[0];
-  };
+      const uploadResult = await uploadResponse.json();
+      return uploadResult.result.variants[0];
+    } catch (error) {
+      console.error('Image upload failed:', error);
+      throw error;
+    }
+  }
 }
 
 export default API;

@@ -1,5 +1,4 @@
 import { Editor, useEditor } from '@tiptap/react';
-
 import { ExtensionKit } from '@/extensions/extension-kit';
 import { useEffect } from 'react';
 
@@ -16,9 +15,9 @@ export const useBlockEditor = () => {
       onCreate: ({ editor }) => {
         if (editor.isEmpty) {
           // editor.commands.setContent(initialContent)
-          //   editor.commands.setContent(`<react-component>
+          // editor.commands.setContent(`<react-component>
           //   <p>This is editable. You can create a new component by pressing Mod+Enter.</p>
-          // </react-component>`)
+          // </react-component>`);
         }
       },
       extensions: [...ExtensionKit()],
@@ -30,6 +29,7 @@ export const useBlockEditor = () => {
           class: 'min-h-full',
         },
       },
+      immediatelyRender: false, // Prevents hydration mismatch
     },
     [],
   );

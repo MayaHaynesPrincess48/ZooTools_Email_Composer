@@ -40,11 +40,11 @@ import {
   Mathematics,
   TaskItem,
   ExtendedImage,
-  ResizeImage,
+  // ResizeImage,
 } from '.';
 import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
 import { History } from '@tiptap/extension-history';
-import { ImageUpload } from './ImageUpload';
+// import { ImageUpload } from './ImageUpload';
 import { lowlight } from 'lowlight';
 
 // Import highlight.js languages
@@ -112,21 +112,25 @@ export const ExtensionKit = () => [
   // ResizeImage,
   FileHandler.configure({
     allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
-    onDrop: (currentEditor, files, pos) => {
-      files.forEach(async () => {
-        const url = await API.uploadImage();
-        currentEditor.chain().setImageBlockAt({ pos, src: url }).focus().run();
-      });
+    onDrop: async (currentEditor, files, pos) => {
+      for (const file of files) {
+        try {
+          const url = await API.uploadImage(file);
+          currentEditor.chain().setImageBlockAt({ pos, src: url }).focus().run();
+        } catch (error) {
+          console.error('Image upload failed:', error);
+        }
+      }
     },
-    onPaste: (currentEditor, files) => {
-      files.forEach(async () => {
-        const url = await API.uploadImage();
-        return currentEditor
-          .chain()
-          .setImageBlockAt({ pos: currentEditor.state.selection.anchor, src: url })
-          .focus()
-          .run();
-      });
+    onPaste: async (currentEditor, files) => {
+      for (const file of files) {
+        try {
+          const url = await API.uploadImage(file);
+          currentEditor.chain().setImageBlockAt({ pos: currentEditor.state.selection.anchor, src: url }).focus().run();
+        } catch (error) {
+          console.error('Image upload failed:', error);
+        }
+      }
     },
   }),
   Emoji.configure({

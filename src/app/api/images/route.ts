@@ -9,7 +9,7 @@ export async function POST(): Promise<Response> {
   };
 
   const r = await fetch(
-    'https://api.cloudflare.com/client/v4/accounts/dd6e3021bfaef6eec1a68e26a593f4ca/images/v2/direct_upload',
+    'https://api.cloudflare.com/client/v4/accounts/1SlS_Sa7SC9IuABNPWLxeGMH4G8/images/v2/direct_upload',
     options,
   );
 

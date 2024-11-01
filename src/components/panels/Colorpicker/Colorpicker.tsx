@@ -18,16 +18,16 @@ const PickerContainer = styled.div`
   gap: 0.5rem;
 `;
 
-const ColorInput = styled.input`
+const ColorInput = styled.input<{ $backgroundColor: string; $fontColor: string }>`
   padding: 0.5rem;
-  color: black;
-  background-color: white;
-  border: 1px solid #e0e0e0; // Neutral border color
-  border-radius: 0.25rem; // Rounded corners
+  color: ${({ $fontColor }) => $fontColor};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  border: 1px solid #e0e0e0;
+  border-radius: 0.25rem;
 
   &:focus {
-    outline: 1px solid #b0c4de; // Focus outline color
-    border-color: #b0c4de; // Focus border color
+    outline: 1px solid #b0c4de;
+    border-color: #b0c4de;
   }
 `;
 
@@ -39,37 +39,46 @@ const ButtonsContainer = styled.div`
   max-width: 15rem;
 `;
 
-export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
-  const [colorInputValue, setColorInputValue] = useState(color || '');
+export const ColorPicker = ({ color: initialColor = '', onChange, onClear }: ColorPickerProps) => {
+  const [color, setColor] = useState(initialColor);
+  const [colorInputValue, setColorInputValue] = useState(initialColor);
 
-  const handleColorUpdate = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setColorInputValue(event.target.value);
-  }, []);
+  // Update color in all components
+  const handleColorChange = useCallback(
+    (newColor: string) => {
+      setColor(newColor);
+      setColorInputValue(newColor);
+      if (onChange) onChange(newColor);
+    },
+    [onChange],
+  );
 
-  const handleColorChange = useCallback(() => {
-    const isCorrectColor = /^#([0-9A-F]{3}){1,2}$/i.test(colorInputValue);
+  // Handle input changes with hex validation
+  const handleInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newColor = event.target.value;
+      setColorInputValue(newColor);
 
-    if (!isCorrectColor) {
-      if (onChange) {
-        onChange('');
+      if (/^#([0-9A-F]{3}){1,2}$/i.test(newColor)) {
+        handleColorChange(newColor);
       }
-      return;
-    }
+    },
+    [handleColorChange],
+  );
 
-    if (onChange) {
-      onChange(colorInputValue);
-    }
-  }, [colorInputValue, onChange]);
+  const backgroundColor = /^#([0-9A-F]{3}){1,2}$/i.test(colorInputValue) ? colorInputValue : '#ffffff';
+  const fontColor = /^#([0-9A-F]{3}){1,2}$/i.test(colorInputValue) ? '#ffffff' : '#000000';
 
   return (
     <PickerContainer>
-      <HexColorPicker className="w-full" color={color || ''} onChange={onChange} />
+      <HexColorPicker color={color} onChange={handleColorChange} />
       <ColorInput
         type="text"
         placeholder="#000000"
         value={colorInputValue}
-        onChange={handleColorUpdate}
-        onBlur={handleColorChange}
+        onChange={handleInputChange}
+        $backgroundColor={backgroundColor}
+        $fontColor={fontColor}
       />
       <ButtonsContainer>
         {themeColors.map(currentColor => (
@@ -77,7 +86,7 @@ export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
             active={currentColor === color}
             color={currentColor}
             key={currentColor}
-            onColorChange={onChange}
+            onColorChange={handleColorChange}
           />
         ))}
         <Toolbar.Button tooltip="Reset color to default" onClick={onClear}>

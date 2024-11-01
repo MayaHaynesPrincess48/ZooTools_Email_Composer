@@ -37,9 +37,14 @@ const StyledEditorContent = styled(EditorContent)`
   overflow-y: auto;
 `;
 
-export const EmailComposer = ({ setJson, setHtml }) => {
+interface EmailEditorProps {
+  setJson: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
+  setHtml: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const EmailComposer: React.FC<EmailEditorProps> = ({ setJson, setHtml }) => {
   const menuContainerRef = useRef(null);
-  const editorRef = useRef(null); // Adjust the type if necessary
+  const editorRef = useRef(null);
 
   const { editor, characterCount } = useBlockEditor();
 

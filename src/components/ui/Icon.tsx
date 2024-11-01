@@ -1,21 +1,30 @@
-import { cn } from '@/lib/utils'
-import { icons } from 'lucide-react'
-import { memo } from 'react'
+import { icons } from 'lucide-react';
+import styled from 'styled-components';
+import { memo } from 'react';
 
 export type IconProps = {
-  name: keyof typeof icons
-  className?: string
-  strokeWidth?: number
-}
+  name: keyof typeof icons;
+  className?: string;
+  strokeWidth?: number;
+};
 
-export const Icon = memo(({ name, className, strokeWidth }: IconProps) => {
-  const IconComponent = icons[name]
+// Define a styled component for icons
+const StyledIcon = styled.div<{ strokeWidth: number }>`
+  width: 1rem;
+  height: 1rem;
+  svg {
+    stroke-width: ${({ strokeWidth }) => strokeWidth}px;
+  }
+`;
+
+export const Icon = memo(({ name, className, strokeWidth = 2.5 }: IconProps) => {
+  const IconComponent = icons[name];
 
   if (!IconComponent) {
-    return null
+    return null;
   }
 
-  return <IconComponent className={cn('w-4 h-4', className)} strokeWidth={strokeWidth || 2.5} />
-})
+  return <StyledIcon as={IconComponent} className={className} strokeWidth={strokeWidth} />;
+});
 
-Icon.displayName = 'Icon'
+Icon.displayName = 'Icon';
