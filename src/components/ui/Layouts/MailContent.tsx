@@ -8,15 +8,10 @@ const MailContentWrapper = styled.div`
   height: 570px;
 `;
 
-interface MailContentProps {
-  setJson: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
-  setHtml: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const MailContent: React.FC<MailContentProps> = ({ setJson, setHtml }) => {
+const MailContent = () => {
   return (
     <MailContentWrapper>
-      <EmailComposer setJson={setJson} setHtml={setHtml} />
+      <EmailComposer />
     </MailContentWrapper>
   );
 };

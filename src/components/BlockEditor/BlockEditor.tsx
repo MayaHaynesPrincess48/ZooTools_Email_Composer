@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useRef } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import { EditorContent } from '@tiptap/react'; // Ensure you're importing the right EditorContent
 import { LinkMenu } from '@/components/menus';
 import { useBlockEditor } from '@/hooks/useBlockEditor';
@@ -37,12 +37,7 @@ const StyledEditorContent = styled(EditorContent)`
   overflow-y: auto;
 `;
 
-interface EmailEditorProps {
-  setJson: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
-  setHtml: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export const EmailComposer: React.FC<EmailEditorProps> = ({ setJson, setHtml }) => {
+export const EmailComposer = () => {
   const menuContainerRef = useRef(null);
   const editorRef = useRef(null);
 
@@ -50,21 +45,29 @@ export const EmailComposer: React.FC<EmailEditorProps> = ({ setJson, setHtml }) 
 
   const providerValue = useMemo(() => ({}), []);
 
+  const editorContextHook = useContext(EditorContext);
+  const { setJson, setHtml, setEditorContext } = editorContextHook;
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const handleUpdate = () => {
+      const json = editor.getJSON();
+      const html = editor.getHTML();
+      setJson(json);
+      setHtml(html);
+    };
+
+    editor.on('update', handleUpdate);
+
+    return () => {
+      editor.off('update', handleUpdate);
+    };
+  }, [editor, setJson, setHtml]);
+
   if (!editor) {
-    return null; // Consider adding a loading state here
+    return null;
   }
-
-  const getJsonContent = () => {
-    const jsonContent = editor.getJSON();
-    console.log('JSON: ', jsonContent);
-    setJson(jsonContent);
-  };
-
-  const getHtmlContent = () => {
-    const htmlContent = editor.getHTML();
-    console.log('HTML: ', htmlContent);
-    setHtml(htmlContent);
-  };
 
   return (
     <EditorContext.Provider value={providerValue}>
@@ -78,8 +81,6 @@ export const EmailComposer: React.FC<EmailEditorProps> = ({ setJson, setHtml }) 
           <TableRowMenu editor={editor} appendTo={menuContainerRef} />
           <TableColumnMenu editor={editor} appendTo={menuContainerRef} />
           <ImageBlockMenu editor={editor} appendTo={menuContainerRef} />
-          <button onClick={getJsonContent}>Get JSON</button>
-          <button onClick={getHtmlContent}>Get HTML</button>
         </MenuContainer>
       </Container>
       <MessageHandler editor={editor} />

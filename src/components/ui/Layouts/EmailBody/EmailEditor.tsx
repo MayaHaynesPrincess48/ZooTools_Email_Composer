@@ -16,16 +16,11 @@ const EditorComponent = styled.div`
   gap: 1rem;
 `;
 
-interface EmailEditorProps {
-  setJson: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
-  setHtml: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const EmailEditor: React.FC<EmailEditorProps> = ({ setJson, setHtml }) => {
+const EmailEditor = () => {
   return (
     <EditorComponent>
       <ToAddress />
-      <MailContent setJson={setJson} setHtml={setHtml} />
+      <MailContent />
       <MailContentBtn />
     </EditorComponent>
   );

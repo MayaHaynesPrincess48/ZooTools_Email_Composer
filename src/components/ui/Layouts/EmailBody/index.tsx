@@ -55,11 +55,12 @@ const TabsContent = styled(Tabs.Content)``;
 
 const EmailBody = () => {
   const [activeTab, setActiveTab] = useState('tab1');
+  const [editorContext, setEditorContext] = useState(null);
   const [json, setJson] = useState<Record<string, unknown>>({});
   const [html, setHtml] = useState<string>('');
 
   return (
-    <>
+    <EditorContext.Provider value={{ editorContext, setEditorContext, json, setJson, html, setHtml }}>
       <TabsRoot defaultValue="tab1" onValueChange={value => setActiveTab(value)}>
         <div className="flexBetween">
           {activeTab === 'tab1' ? <NewMessageTitle>New Message</NewMessageTitle> : <p></p>}
@@ -71,7 +72,7 @@ const EmailBody = () => {
           </TabsList>
         </div>
         <TabsContent value="tab1">
-          <EmailEditor setJson={setJson} setHtml={setHtml} />
+          <EmailEditor />
         </TabsContent>
         <TabsContent value="tab2">Email Preview</TabsContent>
         <TabsContent value="tab3">
@@ -83,7 +84,7 @@ const EmailBody = () => {
           {JSON.stringify(json, null, 2)}
         </TabsContent>
       </TabsRoot>
-    </>
+    </EditorContext.Provider>
   );
 };
 

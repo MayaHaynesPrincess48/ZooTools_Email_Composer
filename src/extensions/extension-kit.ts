@@ -37,9 +37,7 @@ import {
   VideoLessonBlock,
   Mathematics,
   TaskItem,
-  ExtendedImage,
   ImageBlock,
-  // ResizeImage,
 } from '.';
 import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
 import { History } from '@tiptap/extension-history';
@@ -104,8 +102,6 @@ export const ExtensionKit = () => [
   Underline,
   CharacterCount.configure({ limit: 50000 }),
   ImageBlock,
-  ExtendedImage,
-  // ResizeImage,
   Emoji.configure({
     enableEmoticons: true,
     suggestion: emojiSuggestion,

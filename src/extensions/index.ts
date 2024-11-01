@@ -38,8 +38,6 @@ export { BlockquoteFigure } from './BlockquoteFigure';
 export { Quote } from './BlockquoteFigure/Quote';
 export { QuoteCaption } from './BlockquoteFigure/QuoteCaption';
 export { Link } from './Link';
-export { ExtendedImage } from './ImageBlock/components/ExtendedImage';
-export { ResizeImage } from './ImageBlock/components/ResizeImage';
 export { Columns, Column } from './MultiColumn';
 export { emojiSuggestion } from './EmojiSuggestion';
 export { QuestionBlock } from './QuestionBlock';

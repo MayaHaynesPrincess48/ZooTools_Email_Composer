@@ -1,6 +1,7 @@
 import { Editor, useEditor } from '@tiptap/react';
 import { ExtensionKit } from '@/extensions/extension-kit';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { initialContent } from '../lib/data/initialContent';
 
 declare global {
   interface Window {
@@ -9,12 +10,13 @@ declare global {
 }
 
 export const useBlockEditor = () => {
+  // const [initialContent, setInitialContent] = useState<string | null>(null);
   const editor = useEditor(
     {
       autofocus: true,
       onCreate: ({ editor }) => {
         if (editor.isEmpty) {
-          // editor.commands.setContent(initialContent)
+          editor.commands.setContent(initialContent);
           // editor.commands.setContent(`<react-component>
           //   <p>This is editable. You can create a new component by pressing Mod+Enter.</p>
           // </react-component>`);
